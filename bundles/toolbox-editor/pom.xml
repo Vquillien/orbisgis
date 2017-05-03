@@ -1,17 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>geocatalog</artifactId>
-    <name>geocatalog</name>
-    <description>GeoCatalog panel to list of database tables</description>
+
+    <artifactId>toolbox-editor</artifactId>
+    <name>Toolbox</name>
+    <description>WPS Client</description>
     <url>http://www.orbisgis.org</url>
+    <packaging>bundle</packaging>
+
     <parent>
         <artifactId>orbisgis</artifactId>
         <groupId>org.orbisgis</groupId>
         <version>5.1.0-SNAPSHOT</version>
-        <relativePath>../..</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <packaging>bundle</packaging>
+
     <build>
         <plugins>
             <plugin>
@@ -30,12 +35,12 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.3.7</version>
+                <version>${maven-bundle-plugin-version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Public-Package>org.orbisgis.geocatalog.api</Public-Package>
-                        <Private-Package>org.orbisgis.geocatalog.*</Private-Package>
+                        <Private-Package>org.orbisgis.toolboxeditor.impl.*</Private-Package>
+                        <Bundle-Category>OrbisGIS,WPS</Bundle-Category>
                     </instructions>
                 </configuration>
             </plugin>
@@ -53,60 +58,25 @@
                 </executions>
                 <artifactId>gettext-maven-plugin</artifactId>
                 <configuration>
-                    <poDirectory>${project.build.sourceDirectory}/../resources/org/orbisgis/geocatalog/translation/language/</poDirectory>
-                    <targetBundle>org.orbisgis.geocatalog.Messages</targetBundle>
-                    <keywords>-ktr -kmarktr</keywords>
+                    <poDirectory>src/main/resources/org/orbisgis/toolboxeditor/translation/</poDirectory>
+                    <targetBundle>org.orbisgis.toolboxeditor.Messages</targetBundle>
+                    <keywords>-ktr</keywords>
                     <outputFormat>properties</outputFormat>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
-            <version>1.2.4</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${sl4j-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.enterprise</artifactId>
-            <version>5.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>orbisgis-sif</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>core-jdbc</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>editor-jdbc</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.orbiswps</groupId>
+            <artifactId>server</artifactId>
+            <version>${orbiswps-version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -114,9 +84,22 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>h2gis-utilities</artifactId>
+            <groupId>org.orbiswps</groupId>
+            <artifactId>client</artifactId>
+            <version>${orbiswps-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.orbisgis</groupId>
+            <artifactId>h2gis-functions</artifactId>
             <version>${h2-gis-version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>
